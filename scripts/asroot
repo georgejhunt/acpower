@@ -45,6 +45,7 @@ EOF
 yum --disablerepo=* --enablerepo=local -c file:///tmp/yum.conf -y install openssl openvpn 
 
 cp /media/scripts/debug.ovpn /etc/openvpn/
+cp /media/scripts/vpnstart /root
 
 
 

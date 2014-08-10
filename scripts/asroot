@@ -1,6 +1,24 @@
 #!/bin/sh
-# install ACPower software
+# Configure the XO to work as a remotely activated test client
 
+# turn on sshd
+systemctl enable sshd.service
+
+# put some support people's keys in place
+mkdir -p /root/.ssh
+cp /media/scripts/support_authorized_keys /root/.ssh/authorized_keys
+chmod 600 /root/.ssh/authorized_keys
+
+# start listening for connections
+systemctl start sshd.service
+
+# set up avahi to announce the ip address
+cp /media/scripts/xo-client.service /etc/avahi/services
+# avahi is set to run by default on xo, no need to start it up, or enable
+
+# copy the test scripts to a place on the $PATH
+cp -r /media/testing/root/* /root/
+cp -r /media/testing/olpc/* /home/olpc/
 
 # copy the acpower recorder summarizing routines to place on $PATH
 cp -r /media/acpower/* /usr/local/sbin
@@ -13,6 +31,21 @@ if [ $? -eq 0 ]; then
 else
    echo "PYTHONPATH=/usr/local/sbin" >> /root/.bashrc
 fi
+
+# create a temp file which points to our local repo
+			cat << EOF > /tmp/yum.conf
+[local]
+name=local
+baseurl=file:///media/localrepo
+enabled=1
+gpgcheck=0
+cost=100
+EOF
+
+yum --disablerepo=* --enablerepo=local -c file:///tmp/yum.conf -y install openssl openvpn 
+
+cp /media/scripts/debug.ovpn /etc/openvpn/
+
 
 
 # put a large marker on the screen that is easily checked for

@@ -21,6 +21,7 @@ cp -r $installdir/../xsce-tests/Run-on-XO/testing $installdir/xo-client/
 # get the most recent acpower scripts
 rsync -r $installdir/acpower/* $installdir/xo-client/acpower/
 rsync -r $installdir/scripts/* $installdir/xo-client/scripts/
+rsync -r $installdir/localrepo/* $installdir/xo-client/localrepo/
 
 # label the zip filename to include the version
 pushd $installdir/xo-client

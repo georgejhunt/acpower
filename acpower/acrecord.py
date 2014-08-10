@@ -301,7 +301,7 @@ class ShowPowerHistory(Tools):
         if start <> 0:
             data_dict["start"] = start 
             if not data_dict.has_key("end"):
-                data_dict["end"] = self.parse_date("12/31/2099")
+                data_dict["end"] = self.parse_date("12/31/2030")
             self.put_data_file()
             if debug:
                 self.print_data_file()

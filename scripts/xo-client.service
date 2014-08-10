@@ -1,0 +1,7 @@
+<service-group>
+	<name replace-wildcards="yes">sshd server listening on XO %h</name>
+	<service>
+		<type>_ssh._tcp</type>
+	</service>
+</service-group>
+

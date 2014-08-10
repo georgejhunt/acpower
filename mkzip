@@ -1,0 +1,32 @@
+#!/bin/bash
+# script to create acpower-client zip file
+set -x -e -u
+
+VERSION=`git describe | sed 's/^v//' | sed 's/-/./g'
+
+# where is this script located?`
+installdir=$(cd `dirname ${0}`; pwd)
+rm -f $installdir/acpower*.zip
+
+# put version into the zip file
+rm -f $installdir/clientversion*
+echo  "$VERSION" > $installdir/clientversion_$VERSION
+
+# get the tinycore framework
+rsync -r $installdir/../mktinycorexo/output/* $installdir/xo-client/
+
+# get the xsce-test suite
+cp -r $installdir/../xsce-tests/Run-on-XO/testing $installdir/xo-client/
+
+# get the most recent acpower scripts
+rsync -r $installdir/acpower/* $installdir/xo-client/acpower/
+rsync -r $installdir/scripts/* $installdir/xo-client/scripts/
+
+# label the zip filename to include the version
+pushd $installdir/xo-client
+zip -r -x@$installdir/exclude_list $installdir/acpower-$VERSION.zip ./*
+popd
+
+echo "scp xo-client*.zip george@download.unleashkids.org:/home/george/xo-client"
+echo "ssh george@download.unleashkids.org"
+

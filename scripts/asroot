@@ -1,0 +1,24 @@
+#!/bin/sh
+# install ACPower software
+
+
+# copy the acpower recorder summarizing routines to place on $PATH
+cp -r /media/acpower/* /usr/local/sbin
+
+# set an environment PYTHONPATH so acpower program can find imports
+grep PYTHONPATH /root/.bashrc 
+if [ $? -eq 0 ]; then
+   grep PYTHONPATH /root/.bashrc | grep "/usr/local/sbin" || \
+        PYTHONPATH=$PYTHONPATH:/usr/local/sbin
+else
+   echo "PYTHONPATH=/usr/local/sbin" >> /root/.bashrc
+fi
+
+
+# put a large marker on the screen that is easily checked for
+echo ""
+echo "           ********************************************"
+echo "           *                                          *"
+echo "           *    Your ACPower install was successful   *"
+echo "           *                                          *"
+echo "           ********************************************"

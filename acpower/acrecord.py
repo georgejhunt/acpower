@@ -374,7 +374,7 @@ class ShowPowerHistory(Tools):
         power_list = []
         gap_length_list = []
         first = False
-        if len(online) > 1:
+        if len(online) > 0:
             for key in sorted(online):
                 mysum += online[key]
                 power_list.append( (key,online[key]) )

@@ -10,10 +10,11 @@ cp /media/scripts/support_authorized_keys /root/.ssh/authorized_keys
 chmod 600 /root/.ssh/authorized_keys
 # the following key will let the ACPOWER client talk to the Amazon instance
 cp /media/scripts/remote_site /root/.ssh
+chmod 600 /root/.ssh/remote_site
 
 # copy the sneakernet script 
 cp -p /media/scripts/sneakernet /usr/local/sbin
-cp -p /media/scripts/reportpower /usr/local/sbin
+cp -p /media/scripts/cloud /usr/local/sbin
 
 # start listening for connections
 systemctl start sshd.service

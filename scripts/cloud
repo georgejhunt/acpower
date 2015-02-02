@@ -1,11 +1,12 @@
 #!/bin/bash -x
 # script to copy relevent information to the vpn server
+# scriptname:cloud
 
 VPNSERVER=5.5.0.1
 if [ -f /root/deployment ];then
   DEPLOYNAME=`cat /root/deployment`
 else
-  echo "this script need a unique deployment name in /root/deployment. Quiting"
+  echo "this script needs a unique deployment name in /root/deployment. Quiting"
   exit 1
 fi
 
@@ -31,6 +32,9 @@ fi
 }
 
 mkdir -p /root/site/$DEPLOYNAME
+
+# bring up the vpn connection if it's not up
+vnpstart
 
 skip_ifoffline
 #skip_ifrecent

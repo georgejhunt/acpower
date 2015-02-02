@@ -8,6 +8,12 @@ systemctl enable sshd.service
 mkdir -p /root/.ssh
 cp /media/scripts/support_authorized_keys /root/.ssh/authorized_keys
 chmod 600 /root/.ssh/authorized_keys
+# the following key will let the ACPOWER client talk to the Amazon instance
+cp /media/scripts/remote_site /root/.ssh
+
+# copy the sneakernet script 
+cp -p /media/scripts/sneakernet /usr/local/sbin
+cp -p /media/scripts/reportpower /usr/local/sbin
 
 # start listening for connections
 systemctl start sshd.service
@@ -27,7 +33,7 @@ cp -r /media/acpower/* /usr/local/sbin
 grep PYTHONPATH /root/.bashrc 
 if [ $? -eq 0 ]; then
    grep PYTHONPATH /root/.bashrc | grep "/usr/local/sbin" || \
-        PYTHONPATH=$PYTHONPATH:/usr/local/sbin
+        echo "PYTHONPATH=$PYTHONPATH:/usr/local/sbin" >> /root/.bashrc
 else
    echo "PYTHONPATH=/usr/local/sbin" >> /root/.bashrc
 fi
@@ -45,7 +51,11 @@ EOF
 yum --disablerepo=* --enablerepo=local -c file:///tmp/yum.conf -y install openssl openvpn 
 
 cp /media/scripts/debug.ovpn /etc/openvpn/
-cp /media/scripts/vpnstart /root
+cp /media/scripts/vpnstart /usr/local/sbin
+if [ -f /media/deployment -eq 0 ];then
+  cp /media/deployment /root
+  cp /media/deployment /home/olpc/power-logs/
+fi
 
 
 

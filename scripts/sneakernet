@@ -1,0 +1,15 @@
+#!/bin/bash -x
+# script to copy the power logs to a USB stick
+mkdir -p /tmp/usb
+mount /dev/sda1 /tmp/usb
+if [ $? -ne 0 ];then
+  echo "not able to mount usb stick"
+else
+  DEPLOY=
+  if [ -f /root/deployment ];then
+    DEPLOY=`cat /root/deployment`
+  fi
+  acpower -dp > /home/olpc/$DEPLOYacpower.txt
+  tar czf /tmp/usb/acpower$DEPLOY.tgz /home/olpc/power-logs /home/olpc/$DEPLOYacpower.txt
+  sync
+fi

@@ -9,7 +9,12 @@ else
   if [ -f /root/deployment ];then
     DEPLOY=`cat /root/deployment`
   fi
-  acpower -dp > /home/olpc/$DEPLOYacpower.txt
+  acpower -dp > /tmp/usb/$DEPLOYacpower.txt
   tar czf /tmp/usb/acpower$DEPLOY.tgz /home/olpc/power-logs /home/olpc/$DEPLOYacpower.txt
-  sync
+  umount /tmp/usb
+  echo "================================================"
+  echo 
+  echo "Report, and tarred, zipped data written to USB stick"  
+  echo 
+  echo "================================================"
 fi

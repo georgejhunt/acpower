@@ -4,9 +4,9 @@ acpower
 A recorder of AC power, runs on XO1, installs on a developer-key enabled XO1 offline
 
 New features
-  "sneakernet" -- put a USB stick in the XO, type "sneakernet" in a terminal window.
+  "sneakernet" -- put a USB stick in the XO, type "sneakernet" in a terminal window. This will put the power summary in .txt format, and also a tarred and zipped copy of the raw data onto the USB stick (raw data may help fixing bugs).
 
-  "cloud"    -- Connect XO to a wifi access point that had internet access, type "cloud" in terminal.
+  "cloud"    -- Connect XO to a wifi access point that had internet access, type "cloud" in terminal. This will open up a VPN connection to an Amazon server instance. The data will be available at http://50.17.210.12:3333.
 
 How to install
 ==============

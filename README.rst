@@ -5,6 +5,7 @@ A recorder of AC power, runs on XO1, installs on a developer-key enabled XO1 off
 
 New features
   "sneakernet" -- put a USB stick in the XO, type "sneakernet" in a terminal window.
+
   "cloud"    -- Connect XO to a wifi access point that had internet access, type "cloud" in terminal.
 
 How to install

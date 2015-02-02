@@ -18,10 +18,17 @@ fi
 }
 
 function skip_ifoffline {
-  ping -c 3 -w 3 $VPNSERVER
-  if [ $? -ne 0 ]; then
-    exit 0
-  fi
+# a vpn connection can take a while to come up
+  for i in `seq 1 10`;do
+    ping -c 3 -w 3 $VPNSERVER
+    if [ $? -eq 0 ]; then
+       return
+    fi
+    sleep 10 
+  done
+  echo
+  echo "giving up on starting the VPN connection, "
+  exit 1
 }
 
 function cpy_pwrlogs_ifxo {
@@ -34,7 +41,7 @@ fi
 mkdir -p /root/site/$DEPLOYNAME
 
 # bring up the vpn connection if it's not up
-vnpstart
+vpnstart
 
 skip_ifoffline
 #skip_ifrecent

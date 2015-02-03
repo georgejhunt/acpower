@@ -47,8 +47,8 @@ GRAPH = True
 
 class PowerChunk():
     def __init__(self,pdstart,pdlength):
-	self.startsec = pdstart
-	self.lensec = pdlength
+        self.startsec = pdstart
+        self.lensec = pdlength
 
 class tzlocal(datetime.tzinfo):
     global tz_offset
@@ -474,7 +474,7 @@ class ShowPowerHistory(Tools):
                 if seconds_in_current_day < 10 and MATRIX:
                     print
                 if (current_bucket_seconds - first_midnight_seconds)%864000 >= 863100 and MATRIX:
-                	current_day_str = self.ts2date(current_bucket_seconds)
+                    current_day_str = self.ts2date(current_bucket_seconds)
                     print("\n%s  3   4   5   6   7   8   9   10  11  12  13  14  15  16  17  18  19  20  21  22  23"%current_day_str)
 
             if GRAPH:
@@ -490,7 +490,7 @@ class ShowPowerHistory(Tools):
                         else:
                             sys.stdout.write(" ")
                     print
-                    print "\n0   1   2   3   4   5   6   7   8   9   10  11  12  13  14  15  16  17  18  19  20  21  22  23"
+                print "\n0   1   2   3   4   5   6   7   8   9   10  11  12  13  14  15  16  17  18  19  20  21  22  23"
 
             if args.powersegments:
                 print("\nINDIVIDUAL POWER PERIODS:")
